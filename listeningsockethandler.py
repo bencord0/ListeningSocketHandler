@@ -34,8 +34,8 @@ class ListeningSocketHandler(logging.Handler):
                     tsh._conn = conn.makefile('w')
                 except socket.error:
                     pass
-                self._accept_thread = threading.Thread(target=start_listening, args=(self,))
 
+        self._accept_thread = threading.Thread(target=start_listening, args=(self,))
         self._accept_thread.daemon = True
         self._accept_thread.start()
 
