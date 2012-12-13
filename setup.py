@@ -9,4 +9,5 @@ setup(
     license='LICENSE.txt',
     description='The opposite of logging.handlers.SocketHandler',
     long_description=open('README.txt').read(),
+    py_modules=['listeningsockethandler'],
 )
