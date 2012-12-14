@@ -1,4 +1,5 @@
 import logging
+import socket
 import unittest
 
 from ListeningSocketHandler import ListeningSocketHandler
@@ -15,13 +16,6 @@ class TestListeningSocketHandler(unittest.TestCase):
 
     def test_getsockport(self):
         self.assertIsInstance(self.lsh.getsockname()[1], int)
-
-    def test_recieve_message(self):
-        client = socket.socket()
-        client.connect(("localhost", self.lsh.getsockname()[1]))
-        self.log.warn("Sending a warning")
-        buf = client.recv(4096)
-        self.assertEqual(buf, "Sending a warning\n")
 
 if __name__ == '__main__':
     unittest.main()
