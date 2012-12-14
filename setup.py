@@ -31,6 +31,6 @@ setup(
     description='The opposite of logging.handlers.SocketHandler',
     long_description=open('README.txt').read(),
     install_requires=requires,
-    test_require=['tox'],
+    tests_require=['tox'],
     cmdclass = {'test': Tox},
 )
