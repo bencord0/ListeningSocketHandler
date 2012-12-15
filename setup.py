@@ -14,7 +14,7 @@ with open(req_fn) as f:
 
 setup(
     name='ListeningSocketHandler',
-    version='0.0.2',
+    version='0.1.0',
     author='Ben Cordero',
     author_email='bmc@linux.com',
     packages=['ListeningSocketHandler', 'tests'],
