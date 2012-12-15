@@ -1,7 +1,7 @@
 ListeningSocketHandler
 ======================
 
-https://travis-ci.org/bencord0/ListeningSocketHandler.png
+.. image:: https://travis-ci.org/bencord0/ListeningSocketHandler.png
 
 The opposite of logging.handlers.SocketHandler
 
@@ -17,8 +17,8 @@ Example Usage
 
 2. Create some handlers
 
-A normal StreamHandler that outputs to stderr and
-a ListeningSocketHandler bound to port 12345.
+    A normal StreamHandler that outputs to stderr and
+    a ListeningSocketHandler bound to port 12345.
 
     >>> sh = logging.StreamHandler()
     >>> sh.setLevel(logging.WARN)
@@ -38,17 +38,17 @@ a ListeningSocketHandler bound to port 12345.
 
 5. Connect to the logger, and log more detailed events
 
-In a new shell, connect to the logger.
+    In a new shell, connect to the logger.
 
     $ telnet localhost 12345
 
-Back in python, use different log levels.
+    Back in python, use different log levels.
 
     >>> log.critical("A critical message")
     A critical message
     >>> log.debug("A debugging message")
 
-Watch the detailed stream in the telnet session.
+    Watch the detailed stream in the telnet session.
 
     A critical message
     A debugging message
