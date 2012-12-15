@@ -11,7 +11,7 @@ Example Usage
 1. Create a logger
 
     >>> import logging
-    >>> from listeningsockethandler import ListeningSocketHandler
+    >>> from ListeningSocketHandler import ListeningSocketHandler
     >>> log = logging.getLogger()
     >>> log.setLevel(logging.DEBUG)
 
