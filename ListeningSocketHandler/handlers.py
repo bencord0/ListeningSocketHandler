@@ -46,8 +46,13 @@ class ListeningSocketHandler(logging.Handler):
         closed_clients = set()
         for client in self.clients:
             try:
-                client.sendall(record.getMessage())
-                client.sendall("\n")
+                try:
+                    # Python3
+                    message = bytes(record.getMessage() + "\n", 'UTF-8')
+                except TypeError:
+                    # Python2
+                    message = bytes(record.getMessage() + "\n").encode('UTF-8')
+                client.sendall(message)
             except socket.error:
                 closed_clients.add(client)
         for client in closed_clients:
