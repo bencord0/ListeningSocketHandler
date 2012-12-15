@@ -3,7 +3,7 @@ ListeningSocketHandler
 
 The opposite of logging.handlers.SocketHandler
 
-.. image:: https://travis-ci.org/bencord0/ListeningSocketHandler.png
+.. image:: https://travis-ci.org/bencord0/ListeningSocketHandler.png?branch=master
 
 Example Usage
 -------------
