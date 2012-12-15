@@ -11,8 +11,7 @@
 import logging
 import sys
 
-import eventlet
-from eventlet.green import socket, threading
+from gevent import socket, Greenlet
 
 class ListeningSocketHandler(logging.Handler):
     def __init__(self, port=0, ipv6=False):
@@ -21,22 +20,18 @@ class ListeningSocketHandler(logging.Handler):
         self.ipv6 = ipv6
         self.clients = set()
         if self.ipv6:
-            self.socket = eventlet.listen(
-                ("::", self.port),
-                socket.AF_INET6)
+            self.socket = socket.socket(socket.AF_INET6)
+            self.socket.bind(("::", self.port))
         else:
-            self.socket = eventlet.listen(
-                ("0.0.0.0", self.port),
-                socket.AF_INET)
+            self.socket = socket.socket(socket.AF_INET)
+            self.socket.bind(("0.0.0.0", self.port))
+        self.socket.listen(5)
         def start_listening(self):
             while True:
                     conn, addr = self.socket.accept()
                     self.clients.add(conn)
 
-        self._accept_thread = threading.Thread(
-            target=start_listening,
-            args=(self,))
-        self._accept_thread.daemon = True
+        self._accept_thread = Greenlet(start_listening, self)
         self._accept_thread.start()
 
     def emit(self, record):
