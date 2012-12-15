@@ -35,7 +35,7 @@ class TestListeningSocketHandler(unittest.TestCase):
     def test_recv_message(self):
         port = self.lsh.getsockname()[1]
 
-        c = socket.create_connection(("localhost", port), 2)
+        c = socket.create_connection(("localhost", port), 10)
         self._send_message()
         self.assertEquals(c.recv(2048),
 """Sending a warning
