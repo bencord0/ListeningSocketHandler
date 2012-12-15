@@ -14,6 +14,10 @@ import sys
 import socket
 import threading
 
+# Workaround for http://bugs.python.org/issue14308
+# http://stackoverflow.com/questions/13193278/understand-python-threading-bug
+threading._DummyThread._Thread__stop = lambda x: 42
+
 class ListeningSocketHandler(logging.Handler):
     def __init__(self, port=0, ipv6=False):
         super(ListeningSocketHandler, self).__init__()
