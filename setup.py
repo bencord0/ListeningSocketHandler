@@ -3,7 +3,7 @@ import sys
 
 try:
     from setuptools import setup
-except ImportErrror:
+except ImportError:
     from distutils.core import setup
 
 from pkg_resources import parse_requirements
