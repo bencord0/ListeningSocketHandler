@@ -5,6 +5,10 @@ The opposite of logging.handlers.SocketHandler
 
 .. image:: https://travis-ci.org/bencord0/ListeningSocketHandler.png?branch=master
 
+Installation
+------------
+    $ pip install ListeningSocketHandler
+
 Example Usage
 -------------
 

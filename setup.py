@@ -19,9 +19,16 @@ setup(
     author_email='bmc@linux.com',
     packages=['ListeningSocketHandler', 'tests'],
     url='https://github.com/bencord0/ListeningSocketHandler',
-    license='LICENSE.txt',
+    license='Apache License 2.0',
     description='The opposite of logging.handlers.SocketHandler',
-    long_description=open('README').read(),
+    long_description=open('README.rst').read(),
     install_requires=parse_requirements(requires),
     test_suite="tests.get_tests",
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Intended Audience :: System Administrators",
+        "License :: OSI Approved :: Apache Software License",
+        "Topic :: System :: Logging",
+    ]
 )
