@@ -40,25 +40,21 @@ class TestListeningSocketHandler(unittest.TestCase):
 
     def test_recv_message(self):
         port = self.lsh.getsockname()[1]
-        recv_buf = ""
-
-        def start_receiving(port, recv_buf):
-            c = socket.create_connection(("localhost", port), 5)
+        c = socket.create_connection(("localhost", port), 5)
+        def start_receiving(c):
             recv_buf = c.recv(2048)
-            c.close()
-            self.assertEquals(recv_buf,
-"""Sending a warning
-Sending an error
-Exploding
-""")
+            self.assertEqual(recv_buf, b"Hello World!\n")
 
         try:
-            receiving_thread = Greenlet(start_receiving, port, recv_buf)
+            receiving_thread = Greenlet(start_receiving, c)
         except NameError:
-            receiving_thread = threading.Thread(target=start_receiving, args=(port, recv_buf))
+            receiving_thread = threading.Thread(target=start_receiving, args=(c,))
             receiving_thread.daemon=True
         receiving_thread.start()
-        self._send_message()
+        self.log.warn("Hello World!")
+        #self._send_message()
+        receiving_thread.join()
+        c.close()
 
 if __name__ == '__main__':
     unittest.main()
