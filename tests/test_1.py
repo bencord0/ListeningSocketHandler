@@ -1,7 +1,13 @@
 import logging
+import threading
 import unittest
 
-from gevent import socket
+try:
+    from gevent import socket, Greenlet
+except ImportError:
+    import socket
+    import threading
+
 from ListeningSocketHandler import ListeningSocketHandler
 
 class BasicTests(unittest.TestCase):
@@ -34,15 +40,25 @@ class TestListeningSocketHandler(unittest.TestCase):
 
     def test_recv_message(self):
         port = self.lsh.getsockname()[1]
+        recv_buf = ""
 
-        c = socket.create_connection(("localhost", port), 2)
-        self._send_message()
-        self.assertEquals(c.recv(2048),
+        def start_receiving(port, recv_buf):
+            c = socket.create_connection(("localhost", port), 5)
+            recv_buf = c.recv(2048)
+            c.close()
+            self.assertEquals(recv_buf,
 """Sending a warning
 Sending an error
 Exploding
 """)
-        c.close()
+
+        try:
+            receiving_thread = Greenlet(start_receiving, port, recv_buf)
+        except NameError:
+            receiving_thread = threading.Thread(target=start_receiving, args=(port, recv_buf))
+            receiving_thread.daemon=True
+        receiving_thread.start()
+        self._send_message()
 
 if __name__ == '__main__':
     unittest.main()

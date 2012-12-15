@@ -11,7 +11,11 @@
 import logging
 import sys
 
-from gevent import socket, Greenlet
+try:
+    from gevent import socket, Greenlet
+except ImportError:
+    import socket
+    import threading
 
 class ListeningSocketHandler(logging.Handler):
     def __init__(self, port=0, ipv6=False):
@@ -26,12 +30,15 @@ class ListeningSocketHandler(logging.Handler):
             self.socket = socket.socket(socket.AF_INET)
             self.socket.bind(("0.0.0.0", self.port))
         self.socket.listen(5)
-        def start_listening(self):
+        def start_accepting(self):
             while True:
                     conn, addr = self.socket.accept()
                     self.clients.add(conn)
 
-        self._accept_thread = Greenlet(start_listening, self)
+        try:
+            self._accept_thread = Greenlet(start_accepting, self)
+        except NameError:
+            self._accept_thread = threading.Thread(target=start_accepting, args=(self,))
         self._accept_thread.start()
 
     def emit(self, record):
