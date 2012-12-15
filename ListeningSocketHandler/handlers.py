@@ -11,11 +11,8 @@
 import logging
 import sys
 
-try:
-    from gevent import socket, Greenlet
-except ImportError:
-    import socket
-    import threading
+import socket
+import threading
 
 class ListeningSocketHandler(logging.Handler):
     def __init__(self, port=0, ipv6=False):
@@ -35,11 +32,8 @@ class ListeningSocketHandler(logging.Handler):
                     conn, addr = self.socket.accept()
                     self.clients.add(conn)
 
-        try:
-            self._accept_thread = Greenlet(start_accepting, self)
-        except NameError:
-            self._accept_thread = threading.Thread(target=start_accepting, args=(self,))
-            self._accept_thread.daemon = True
+        self._accept_thread = threading.Thread(target=start_accepting, args=(self,))
+        self._accept_thread.daemon = True
         self._accept_thread.start()
 
     def emit(self, record):

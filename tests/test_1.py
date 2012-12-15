@@ -2,11 +2,8 @@ import logging
 import threading
 import unittest
 
-try:
-    from gevent import socket, Greenlet
-except ImportError:
-    import socket
-    import threading
+import socket
+import threading
 
 from ListeningSocketHandler import ListeningSocketHandler
 
@@ -45,11 +42,8 @@ class TestListeningSocketHandler(unittest.TestCase):
             recv_buf = c.recv(2048)
             self.assertEqual(recv_buf, b"Hello World!\r\n")
 
-        try:
-            receiving_thread = Greenlet(start_receiving, c)
-        except NameError:
-            receiving_thread = threading.Thread(target=start_receiving, args=(c,))
-            receiving_thread.daemon=True
+        receiving_thread = threading.Thread(target=start_receiving, args=(c,))
+        receiving_thread.daemon=True
         receiving_thread.start()
         self.log.warn("Hello World!")
         #self._send_message()
