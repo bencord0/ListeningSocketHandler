@@ -48,10 +48,10 @@ class ListeningSocketHandler(logging.Handler):
             try:
                 try:
                     # Python3
-                    message = bytes(record.getMessage() + "\n", 'UTF-8')
+                    message = bytes(record.getMessage() + "\r\n", 'UTF-8')
                 except TypeError:
                     # Python2
-                    message = bytes(record.getMessage() + "\n").encode('UTF-8')
+                    message = bytes(record.getMessage() + "\r\n").encode('UTF-8')
                 client.sendall(message)
             except socket.error:
                 closed_clients.add(client)

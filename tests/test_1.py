@@ -43,7 +43,7 @@ class TestListeningSocketHandler(unittest.TestCase):
         c = socket.create_connection(("localhost", port), 5)
         def start_receiving(c):
             recv_buf = c.recv(2048)
-            self.assertEqual(recv_buf, b"Hello World!\n")
+            self.assertEqual(recv_buf, b"Hello World!\r\n")
 
         try:
             receiving_thread = Greenlet(start_receiving, c)
