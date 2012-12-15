@@ -27,6 +27,7 @@ class ListeningSocketHandler(logging.Handler):
             self.socket = socket.socket(socket.AF_INET)
             self.socket.bind(("0.0.0.0", self.port))
         self.socket.listen(5)
+        print ("ListeningSocketHandler on port: {}".format(self.socket.getsockname()[1]))
         def start_accepting(self):
             while True:
                     conn, addr = self.socket.accept()
