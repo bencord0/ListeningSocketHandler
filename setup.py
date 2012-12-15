@@ -6,11 +6,9 @@ try:
 except ImportErrror:
     from distutils.core import setup
 
-from pkg_resources import parse_requirements
-
 req_fn = os.path.join(os.path.dirname(__file__), 'requirements.txt')
 with open(req_fn) as f:
-    requires = parse_requirements(f.read())
+    requires = f.read().split()
 
 setup(
     name='ListeningSocketHandler',
