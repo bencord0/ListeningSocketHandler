@@ -39,6 +39,7 @@ class ListeningSocketHandler(logging.Handler):
             self._accept_thread = Greenlet(start_accepting, self)
         except NameError:
             self._accept_thread = threading.Thread(target=start_accepting, args=(self,))
+            self._accept_thread.daemon = True
         self._accept_thread.start()
 
     def emit(self, record):
