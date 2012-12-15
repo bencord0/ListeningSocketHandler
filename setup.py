@@ -21,7 +21,7 @@ setup(
     url='https://github.com/bencord0/ListeningSocketHandler',
     license='LICENSE.txt',
     description='The opposite of logging.handlers.SocketHandler',
-    long_description=open('README.txt').read(),
+    long_description=open('README.rst').read(),
     install_requires=requires,
     test_suite="tests.get_tests",
 )

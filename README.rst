@@ -1,9 +1,9 @@
 ListeningSocketHandler
 ======================
 
-.. image:: https://travis-ci.org/bencord0/ListeningSocketHandler.png
-
 The opposite of logging.handlers.SocketHandler
+
+.. image:: https://travis-ci.org/bencord0/ListeningSocketHandler.png
 
 Example Usage
 -------------
