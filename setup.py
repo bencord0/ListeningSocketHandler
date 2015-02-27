@@ -17,7 +17,7 @@ setup(
     version='0.1.1',
     author='Ben Cordero',
     author_email='bmc@linux.com',
-    packages=['ListeningSocketHandler', 'tests'],
+    packages=['ListeningSocketHandler'],
     url='https://github.com/bencord0/ListeningSocketHandler',
     license='Apache License 2.0',
     description='The opposite of logging.handlers.SocketHandler',
